@@ -1,0 +1,8 @@
+# Backend
+venv
+.vscode
+__pycache__
+.env
+.pytest_cache
+/*.sqlite
+__pycache__
