@@ -4,7 +4,9 @@ from jose import jwt, JWTError
 from datetime import datetime, timezone, timedelta
 from os import environ 
 from fastapi.security import OAuth2PasswordBearer
+from dotenv import load_dotenv
 
+load_dotenv()
 
 ALGORITHM = "HS256"
 SECRET_KEY = environ.get("JWT_SECRET_KEY")

@@ -12,7 +12,6 @@ notes_router = APIRouter()
 @notes_router.post("/")
 def create_notes(user: user_dependency, note: NoteSchema, session=Depends(get_session)):
 	new_note = NoteService(user["id"], session).create_note(note)
-	print(new_note)
 	return JSONResponse(status_code=status.HTTP_201_CREATED, content={"note": jsonable_encoder(new_note)})
 	
 @notes_router.get("/")
@@ -67,7 +66,7 @@ def update_category_name_by_id(user: user_dependency, category_id: int, new_name
 		return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={"updated": False})
 	return JSONResponse(status_code=status.HTTP_200_OK, content={"updated": jsonable_encoder(category_to_update)})
 	
-@notes_router.patch("/categories/filterbyname", tags=["category"])
+@notes_router.get("/categories/filterbyname", tags=["category"])
 def filter_notes_by_category(user: user_dependency, name: str, session=Depends(get_session)):
 	notes_with_specific_category_name = NoteService(user["id"], session).get_categories_by_name(name)
 	return JSONResponse(status_code=status.HTTP_200_OK, content={"notes": jsonable_encoder(notes_with_specific_category_name)})
